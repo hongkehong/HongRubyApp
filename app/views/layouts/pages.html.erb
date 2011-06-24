@@ -8,13 +8,16 @@
   <title>HAHA | <%= @title %></title>
   -->
   <title><%= thelp %></title>
-  <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
-  <%= stylesheet_link_tag 'blueprint/print',  :media => 'print' %>
-
+  <%= render 'layouts/pall' %>
 </head>
 <body>
-
-<%= yield %>
+   <div class="container">
+      <%= render 'layouts/phead' %>
+      <div id="content" class="round"> <!-- id in css defined as #content, obj (e.g. body, a), class .container-->
+        <%= yield %>
+      </div>
+      <%= render 'layouts/pfooter' %>
+    </div>
 
 </body>
 </html>

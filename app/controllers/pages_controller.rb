@@ -6,5 +6,7 @@ class PagesController < ApplicationController
   def action2
    @title="action2"
   end
-
+  def signup
+   @title="sign up"
+  end
 end
