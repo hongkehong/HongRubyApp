@@ -7,6 +7,9 @@ describe PagesController do
   #  controller.should be_an_instance_of(PagesController)
   #end
 
+  before(:each) do
+	 @var_me = "HAHA"
+  end
 
   describe "GET 'action1'" do
     it "should be successful" do
@@ -16,7 +19,7 @@ describe PagesController do
     it "should have the right title" do
        get 'action1'
        response.should have_tag("title",
-                           "HAHA | action1")
+                           "#{@var_me} | action1")
 	 end
   end
 
