@@ -12,6 +12,10 @@ ActionController::Routing::Routes.draw do |map|
  # map.actionx '/', :controller => 'pages', :action => 'actionx' #make actionx_path == / == .../pages/
   map.signup '/signup', :controller => 'users', :action =>'new'
   map.home  '/', :controller => 'pages', :action =>'home'
+  
+  map.resources :sessions, :only => [:new, :create, :destroy]
+  map.signin  '/signin',  :controller => 'sessions', :action => 'new'
+  map.signout '/signout', :controller => 'sessions', :action => 'destroy'
 
   
 

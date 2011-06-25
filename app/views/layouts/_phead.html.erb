@@ -1,13 +1,21 @@
 <div id="header" class="round">
-        <%= image_tag("rails.png", :alt => "Sample App", :class => "round") %>
+        <%= link_to logo, home_path %>
+        <!--<%= image_tag("rails.png", :alt => "Sample App", :class => "round") %> -->
         <!--<img alt="Sample App" class="round" src="/images/rails.png" />  -->
 
         <ul class="navigation round">
           <li><%= link_to "Home",    home_path %></li>
-          <li><%= link_to "action1", action1_path %></li>
-          <!-- <li><a href="#">Home</a></li> -->
-
+			 <!-- <li><a href="#">Home</a></li> -->
+          
+			 <li><%= link_to "action1", action1_path %></li>
           <li><%= link_to "action2", action2_path %></li>
-          <li><%= link_to "Sign up", signup_path %></li>
+          
+			 <% if signed_in? %>
+          <li><%= link_to "Profile", current_user %></li>
+          <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+			 <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+			 <% else %>
+			 <li><%= link_to "Sign in", signin_path %></li>
+			 <% end %>
         </ul>
-      </div>
+</div>

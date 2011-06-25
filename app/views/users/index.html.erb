@@ -1,9 +1,12 @@
 <h1>Listing users</h1>
+<%= will_paginate %>
 
 <table>
   <tr>
+    <th>Id</th>
     <th>Name</th>
     <th>Email</th>
+    <th>Admin</th>
   </tr>
 
 <% @users.each do |user| %>
@@ -11,6 +14,7 @@
 	 <td><%=h user.id %></td>
     <td><%=h user.name %></td>
     <td><%=h user.email %></td>
+    <td><%=h user.admin %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -19,3 +23,6 @@
 </table>
 <br/>
 <%= link_to 'New user', new_user_path %>
+
+<%= will_paginate %>
+

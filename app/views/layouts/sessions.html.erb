@@ -1,28 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <!--
-  <title>HAHA | <%= @title %></title>
-  -->
-  <title><%= thelp %></title>
+  <title><%= @title %></title>
   <%= render 'layouts/pall' %>
 </head>
 <body>
    <div class="container">
       <%= render 'layouts/phead' %>
-      <div id="content" class="round"> <!-- id in css defined as #content, obj (e.g. body, a), class .container-->
+      <div id="content" class="round"> 
+
         <% flash.each do |key, value| %>
           <%= content_tag(:div, value, :class => "flash #{key}") %>
         <% end %> 
         <%= yield %>
       </div>
+
       <%= render 'layouts/pfooter' %>
       <%= debug(params) if Rails.env.development? %>
     </div>
-    
 
 </body>
 </html>
