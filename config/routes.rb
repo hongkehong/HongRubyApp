@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  
+ # map.xxx '/users', :controller => 'pages', :action =>'home'
   map.resources :microposts
   map.resources :users
 
@@ -10,6 +12,9 @@ ActionController::Routing::Routes.draw do |map|
  # map.actionx '/', :controller => 'pages', :action => 'actionx' #make actionx_path == / == .../pages/
   map.signup '/signup', :controller => 'users', :action =>'new'
   map.home  '/', :controller => 'pages', :action =>'home'
+
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

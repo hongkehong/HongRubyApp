@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index
     @users = User.all
-
+    @title = :List_of_Users
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-
+    @title = :Show
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
-
+    @title = :Sign_Up
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user }
@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @title = :Update_Info
     @user = User.find(params[:id])
   end
 
@@ -44,9 +45,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+        format.html { redirect_to(@user, :notice => 'Congratulations! Your account has been created.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
+        @title = "Please Sign Up again"
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -60,9 +62,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.html { redirect_to(@user, :notice => 'Ok, all your info has been updated.') }
         format.xml  { head :ok }
       else
+        @title = :Update_Again
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
