@@ -105,7 +105,7 @@ class UsersController < ApplicationController
     def check_priority
       if !current_user.admin?
          flash[:notice] = "You don't have the right to delete"
-         redirect_to(users_path)
+         #redirect_to(users_path)
       end
     end
 end
