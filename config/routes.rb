@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   
  # map.xxx '/users', :controller => 'pages', :action =>'home'
-  map.resources :microposts
+  map.resources :microposts, :only => [:create, :destroy]
   map.resources :users
 
-  map.action1 '/action1', :controller => 'pages', :action => 'action1' 
+  map.post '/post', :controller => 'pages', :action => 'post' 
 #action1_path == /action1 ==pages/action1
   map.action2 '/action2', :controller => 'pages', :action => 'action2' 
 #action2_path == /action2

@@ -1,6 +1,7 @@
 class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.xml
+  before_filter :authenticate, :only => [:create, :destroy]
   def index
     @microposts = Micropost.all
 
@@ -40,14 +41,20 @@ class MicropostsController < ApplicationController
   # POST /microposts
   # POST /microposts.xml
   def create
-    @micropost = Micropost.new(params[:micropost])
-
+    #@micropost = Micropost.new(params[:micropost])
+    @micropost = current_user.microposts.build(params[:micropost])
     respond_to do |format|
       if @micropost.save
-        format.html { redirect_to(@micropost, :notice => 'Micropost was successfully created.') }
+        format.html { 
+				#redirect_to(@micropost, :notice => 'Micropost was successfully created.')
+				flash[:success] = "Micropost created!"
+            redirect_to current_user 
+		  }
         format.xml  { render :xml => @micropost, :status => :created, :location => @micropost }
       else
-        format.html { render :action => "new" }
+        format.html { 
+				render 'pages/home' 
+			}
         format.xml  { render :xml => @micropost.errors, :status => :unprocessable_entity }
       end
     end
@@ -76,7 +83,8 @@ class MicropostsController < ApplicationController
     @micropost.destroy
 
     respond_to do |format|
-      format.html { redirect_to(microposts_url) }
+      format.html { redirect_to(home_url) }
+      #format.html { render :nothing => true }
       format.xml  { head :ok }
     end
   end

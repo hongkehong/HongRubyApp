@@ -1,4 +1,12 @@
-<h1> this is home under construction!</h1>
-<%= link_to 'home', home_path %>
+<h3 align="center"><strong>Twitter For Better Experience</strong></h3>
 
+<% unless @feed_items.empty? %>
+  <table>
+    <%= render :partial => 'feed_item', :collection => @feed_items %>
+  </table>
+  <%= will_paginate @feed_items %>
+<% end %>
+
+<%= link_to 'home', home_path %>
+<%= link_to "New? Sign up", signup_path, :class => "signup_button round" %>
 

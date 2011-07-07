@@ -1,0 +1,30 @@
+<% if signed_in? %>
+  <table>
+    <tr>
+      <td>
+        <h2>Share Your Thoughts</h2>
+        <% form_for @micropost do |f| %>
+  		    <%= f.error_messages %>
+          <div>
+            <%= f.text_area :content %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Submit" %>
+          </div>
+        <% end %>
+      </td>
+      <td class="sidebar round">
+      <%= link_to "<strong>Name: #{current_user.name}</strong>", user_path(current_user) %>
+      <br />
+      <strong>Microposts:</strong> <%= current_user.microposts.count %> 
+      </td>
+    </tr>
+  </table>
+<% else %>
+  <p>
+  <p><strong>You haven't sign in, please sign in First</strong></p>
+  <%= link_to "sign in", signin_path %>
+  </p>
+<% end %>
+
+

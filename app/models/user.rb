@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation 
   #things submitted
-
+  has_many :microposts, :dependent => :destroy
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates_presence_of :name, :email
@@ -36,6 +36,13 @@ class User < ActiveRecord::Base
     self.remember_token = encrypt("#{salt}--#{id}--#{Time.now.utc}")
     save_without_validation
   end
+
+  def feed
+    Micropost.all(:conditions => ["user_id = ?", id])
+    # == this.microposts or self.microposts or just mircroposts
+    # because the "has_many", make a_user.microposts methods to get all microposts with user_id = a.user.id!
+  end
+    
 
   private
     def encrypt_password

@@ -1,25 +1,31 @@
 <p>
   <b>Name:</b>
-  <%=h @user.name %>
-  <br>
+    <%=h @user.name %>&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Modify', edit_user_path(@user) %>
+    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; <%= link_to 'Post', post_path %>
+  <br />
   <b>Email:</b>
-  <%=h @user.email %>
-  <br>
-  <%= link_to 'Modify', edit_user_path(@user) %> 
+  <%=h @user.email %>   
 </p>
 
 <table class="profile">
   <tr>
     <td>
-      <h2><%= h @user.name %></h2>
-    </td>
-    <td>
-       <%= image_tag("rails.png", :alt => "Sample App", :class => "round") %>
+      <%= h @user.name %>
+      <%= image_tag("rails.png", :alt => "Hong's App", :class => "round") %>
+      <% unless @user.microposts.empty? %>
+        <table class="microposts">
+          <%= render @microposts %>
+        </table>
+        <%= will_paginate @microposts %>
+      <% end %>
     </td>
     <td class="sidebar round">
-      <strong>Name</strong> <%= h @user.name %><br />
-      <strong>URL</strong>  <%= link_to user_path(@user), user_path(@user) %>
+      <%= link_to "<strong>Name: #{current_user.name}</strong>", user_path(current_user) %>
+      <br />
+      <strong>Microposts:</strong> <%= current_user.microposts.count %> 
     </td>
   </tr>
+</table>
 </table>
 

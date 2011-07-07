@@ -2,11 +2,13 @@ module SessionsHelper
 
   def sign_in(user)
     #user.remember_me!
-      ####!!!
-      ####OR Just# YES!
-      ####this session is not the session_controller (a bit confusing)
-      ####session is for this browser -- server connection only (has a particular id for this sesssion)!
-      session[:cur] = user
+   
+   ###OR Just# YES!
+   ###this session is not the session_controller (a bit confusing)
+   ###session is for this browser 
+   ###-- server connection only (has a particular id for this sesssion)!
+    session[:cur] = user
+    
     #cookies[:remember_token] = { :value   => user.remember_token,
     #                             :expires => 20.years.from_now.utc }
     #this will set cookies data in the browser!
@@ -40,6 +42,9 @@ module SessionsHelper
   end
   def current_user?(user)
     user == current_user
+  end
+  def authenticate
+    deny_access unless signed_in?
   end
 end
 

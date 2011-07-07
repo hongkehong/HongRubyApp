@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <b><%= link_to "#{feed_item.user.name}", feed_item.user %></b>
+  </td>
+  <td class="micropost">
+    <b><span class="content"><%= h feed_item.content %></span></b><br />
+    <span class="timestamp">
+      <i>Posted <%= feed_item.created_at %>.</i>
+    </span>
+  </td>
+  <% if current_user?(feed_item.user) %>
+  <td>
+    <%= link_to "delete", feed_item, :method => :delete, :confirm => "You sure?" %>
+  </td>
+  <% end %>
+</tr>
+

@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = :Show
+    @microposts = @user.microposts.paginate(:page => params[:page])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -91,9 +92,10 @@ class UsersController < ApplicationController
     end
   end
   private
-    def authenticate
-      deny_access unless signed_in?
-    end
+#### move it to SessionHelper that include in application_controller for everyone!
+#    def authenticate
+#      deny_access unless signed_in?
+#    end
     def correct_user
       @user = User.find(params[:id])
       if !current_user?(@user)
