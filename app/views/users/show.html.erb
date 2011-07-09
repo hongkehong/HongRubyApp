@@ -1,8 +1,6 @@
 <p>
   <b>Name:</b>
-    <%=h @user.name %>&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Modify', edit_user_path(@user) %>
-    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; <%= link_to 'Post', post_path %>
+    <%=h @user.name %>  
   <br />
   <b>Email:</b>
   <%=h @user.email %>   
@@ -21,9 +19,23 @@
       <% end %>
     </td>
     <td class="sidebar round">
-      <%= link_to "<strong>Name: #{current_user.name}</strong>", user_path(current_user) %>
+      <%= render 'users/follow_form' %>
+      <%= link_to "<strong>Name: #{@user.name}</strong>", user_path(@user) %>
       <br />
-      <strong>Microposts:</strong> <%= current_user.microposts.count %> 
+      <strong>Microposts:</strong> <%= @user.microposts.count %> 
+      <br />
+      
+      <table>
+       <tr>
+        <td>
+          <a href="<%= following_user_path(@user) %>"> <%= @user.following.count %> following </a>
+        </td>
+        <td>
+          <a href="<%= followers_user_path(@user) %>"> <%= pluralize(@user.followers.count, "follower") %></a>
+        </td>
+       </tr>
+      </table>
+
     </td>
   </tr>
 </table>

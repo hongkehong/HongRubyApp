@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate,   :only => [:show, :edit, :update, :destroy]
-  before_filter :correct_user,   :only => [:show, :edit, :update ]
+  before_filter :correct_user,   :only => [:edit, :update, :destroy ]
   before_filter :check_priority, :only => :destroy
 
   # GET /users
@@ -91,6 +91,24 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+ 
+  # GET /users/1/following 
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(:page => params[:page])
+    render 'show_follow'
+  end
+  #GET /users/1/followes
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(:page => params[:page])
+    render 'show_follow'
+  end
+
+
+
   private
 #### move it to SessionHelper that include in application_controller for everyone!
 #    def authenticate

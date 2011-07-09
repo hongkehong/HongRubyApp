@@ -1,6 +1,6 @@
 <h3 align="center"><strong>Twitter For Better Experience</strong></h3>
 
-<% unless @feed_items.empty? %>
+<% unless (@feed_items.nil? || @feed_items.empty?) %>
   <table>
     <%= render :partial => 'feed_item', :collection => @feed_items %>
   </table>
